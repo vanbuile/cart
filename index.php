@@ -19,7 +19,7 @@ if (isset($_GET['page'])) {
 	}
 } else {
 	$page = 'main';
-	$controller = 'product';
+	$controller = 'blog';
 	$action = 'index';
 }
 require_once('routes.php');
