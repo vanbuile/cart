@@ -3,7 +3,7 @@
 
   <main id="main">
   <div class="container-xl">
-        <div class="row mx-5">
+        <div class="row mx-5 mb-2">
             
             <div class="col-lg-6">
                 <a href=""><img class="img-fluid" src="<?php echo $product->img;?>" alt=""></a>
@@ -33,22 +33,37 @@
                 </ul>
             </div>
         </div>
-        <div class="row">
+        <div class="row mt-2 mx-5">
+            
             <div class="col">
+            <div class="d-none d-sm-block border-bottom border-2 mb-4"></div>
                 <p class="d-inline-flex gap-1">
-                    <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample">
-                      Reviews(2)
+                    <a  class="link-secondary link-underline-opacity-0" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        <h5 class ="d-inline">All Reviews</h5>
+ 
                     </a>
-                    
-                  </p>
-                  <div class="collapse" id="collapseExample">
-                    <div class="card card-body">
-                        Well. I love that. Very pay for it
+                    <span class="badge text-bg-secondary"><?php echo sizeof($reviews)?></span>
+                </p>
+                <div class="collapse" id="collapseExample">
+                    <?php
+                        foreach($reviews as $review){
+                    ?>
+                    <div class="card card-body mb-2 bg-body-tertiary border-0">
+                        <h5 class="card-title"><?php echo $review->fname. " " .$review->lname ?></h5>
+                        <p class="card-text"><?php echo $review->content?></p>
+                        <small><?php echo $review->date?></small>
                     </div>
-                    <div class="card card-body">
-                        Just like other things
+                    <?php }?>
+                </div>
+            <div class="d-none d-sm-block border-bottom border-2 mb-3 "></div>                
+
+                <form action="index.php?page=main&controller=product&action=insertReview" method="post">
+                    <input type="hidden" name="product_id" value="<?php echo $product->id?>">
+                    <div class="input-group mb-3">
+                        <input type="text" name="content" class="form-control" placeholder="Write your review about this product" aria-label="Recipient's username" aria-describedby="button-addon2">
+                        <button class="btn btn-dark" type="submit" id="button-addon2">Write review</button>
                     </div>
-                  </div>
+                </form>
             </div>
         </div>
     </div>
